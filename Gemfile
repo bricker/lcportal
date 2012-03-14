@@ -34,6 +34,7 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+# HEROKU
 group :production do
   gem 'pg'
 end
