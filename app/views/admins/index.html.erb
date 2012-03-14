@@ -1,0 +1,28 @@
+<h1>Admins</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+	  <th>E-mail</th>
+      <th>Member since</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody class="list">
+    <% @admins.each do |admin| %>
+      <tr class="admin">
+        <td><%= admin.id %></td>
+        <td><%= link_to admin.name, admin_path(admin) %></td>
+        <td><%= admin.email %></td>
+        <td><%= pretty_date admin.created_at %></td>
+        <td class="manage">
+          <%= link_to 'Edit', edit_admin_path(admin), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', admin_path(admin), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_admin_path, :class => 'btn btn-primary' %>

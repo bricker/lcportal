@@ -1,0 +1,19 @@
+<%= simple_form_for @writer, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Writer</legend>
+	<%= f.error_notification %>
+	<%= render 'users/fields', fields: f %>
+	
+	<%= f.fields_for :profile do |p| %>
+		<%= p.input :address, as: :text, input_html: { rows: 5 } %>
+		<%= p.input :phone_number %>
+	<% end %>
+
+    <div class="form-actions">
+	  <%= f.error :base %>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', writers_path, class: 'btn' %>
+      <%= link_to 'Destroy', writer_path(@writer), :method => :delete, :confirm => 'Are you sure?', id: "delete-link", :class => 'btn btn-mini btn-danger' %>
+    </div>
+  </fieldset>
+<% end %>

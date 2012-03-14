@@ -1,0 +1,17 @@
+<h1>Admin</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @admin.name %>
+</p>
+
+<p>
+  <b>Email</b><br>
+  <%= @admin.email %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', admins_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_admin_path(@admin), :class => 'btn' %>
+  <%= link_to 'Delete', admin_path(@admin), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

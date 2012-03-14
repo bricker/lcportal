@@ -1,0 +1,13 @@
+An account has been created for you at the <%= Config["app"]["full_name"] %>.
+
+To access the portal, visit <%= root_url %> and login with the following information:
+
+Email: <%= @user.email %>
+Password: <%= @generated_password %>
+
+Please note that the above password is automatically generated.
+Only you know this password, however we recommend changing it after you login for the first time.
+
+Welcome! If you have any issues logging in, please contact <%= Config["company"]["email"] %>
+
+- <%= Config["company"]["name"] %>

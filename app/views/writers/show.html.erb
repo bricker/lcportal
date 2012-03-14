@@ -1,0 +1,27 @@
+<h1>Writer</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @writer.name %>
+</p>
+
+<p>
+  <b>E-mail</b><br>
+  <%= @writer.email %>
+</p>
+
+<p>
+  <b>Address</b><br>
+  <%= @writer.profile.address %>
+</p>
+
+<p>
+  <b>Phone number</b><br>
+  <%= @writer.profile.phone_number %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', writers_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_writer_path(@writer), :class => 'btn' %>
+  <%= link_to 'Delete', writer_path(@writer), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

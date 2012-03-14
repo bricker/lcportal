@@ -1,0 +1,12 @@
+<%= simple_form_for @statement, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Statement</legend>
+	<%= f.error_notification %>
+	<%= f.association :writer %>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', statements_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

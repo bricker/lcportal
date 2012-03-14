@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= check_for :title, default: "#{Config["app"]["name"]} | #{Config["company"]["name"]}" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+          <div class="container">
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+		  <%= link_to Config["app"]["full_name"], root_path, class: "brand" %>
+		  <% if current_user %>
+	          <div class="container nav-collapse">
+	            <ul class="nav">
+					<% if current_user.is_writer? %>
+						<%= nav_link_to "My Profile", profile_path %>
+						<%= nav_link_to "My Statements", statements_path %>
+		                <%= nav_link_to "Contact Liquid Cinema", root_path %>
+					<% elsif current_user.is_admin? %>
+						<%= nav_link_to "Manage Statements", statements_path %>
+						<%= nav_link_to "Manage Writers", writers_path %>
+						<%= nav_link_to "Message Users", root_path %>
+						<li class="divider-vertical"></li>
+						<%= nav_link_to "Manage Admins", admins_path %>
+					<% end %>
+	            </ul>
+	
+				<ul class="nav pull-right">
+					<li><%= link_to "<i class='icon-user icon-white'></i> #{current_user.name}".html_safe, profile_path %></li>
+					<li><%= link_to "Logout", logout_path, id: "logout" %></li>
+				</ul>
+	          </div><!--/.nav-collapse -->
+		  <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+	
+	<% if false %>
+		<div>
+			<% if current_user %>
+				Logged in as <%= current_user.name %> | 
+				<%= link_to "Logout", logout_path, id: "logout" %>
+			<% end %>
+		</div>
+	<% end %>
+
+	    <% flash.each do |name, msg| %>
+	    	<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				<%= msg.html_safe %>
+				<a class="close" data-dismiss="alert">&times;</a>
+			</div>
+	    <% end %>
+	
+      <div class="content">
+        <div class="row">
+          <div class="span9">
+            <%= yield %>
+          </div>
+        </div><!--/row-->
+      </div><!--/content-->
+
+      <footer>
+        <p>&copy; <%= Config["company"]["name"] %> <%= Time.now.year %></p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

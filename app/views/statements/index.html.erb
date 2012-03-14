@@ -1,0 +1,30 @@
+<h1>Statements</h1>
+<table class="table table-striped">
+  <%= any_to_list? @statements, title: "Statements" do %>
+	  <thead>
+	    <tr>
+	      <th>ID</th>
+	      <th>Writer</th>
+	      <th>Created at</th>
+	      <th>Actions</th>
+	    </tr>
+	  </thead>
+	  <tbody class="list">
+		    <% @statements.each do |statement| %>
+		      <tr class="statement">
+		        <td><%= statement.id %></td>
+		        <td><%= link_to statement.writer_id, statement_path(statement) %></td>
+		        <td><%= statement.created_at %></td>
+		        <td class="manage">
+		          <%= link_to 'Edit', edit_statement_path(statement), :class => 'btn btn-mini' %>
+		          <%= link_to 'Destroy', statement_path(statement), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+		        </td>
+		      </tr>
+		    <% end %>
+	  </tbody>
+  <% end %>
+</table>
+
+<%= paginate @statements, theme: "twitter_pager" %>
+
+<%= link_to 'New', new_statement_path, :class => 'btn btn-primary' %>

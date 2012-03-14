@@ -1,0 +1,14 @@
+<%= simple_form_for user, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= title ||= "User" %></legend>
+	<%= f.error_notification %>
+	<%= render 'users/fields', fields: f %>
+
+    <div class="form-actions">
+	  <%= f.error :base %>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', cancel_to ||= root_path, class: 'btn' %>
+      <%= link_to('Destroy', url_for(user), :method => :delete, :confirm => 'Are you sure?', id: "delete-link", :class => 'btn btn-mini btn-danger') unless user.new_record? %>
+    </div>
+  </fieldset>
+<% end %>

@@ -1,0 +1,32 @@
+<h1>Writers</h1>
+<table class="table table-striped">
+	<%= any_to_list? @writers, title: "Writers" do %>
+	  <thead>
+	    <tr>
+	      <th>ID</th>
+		  <th>Name</th>
+		  <th>E-mail</th>
+		  <th>Phone Number</th>
+	      <th>Member Since</th>
+	      <th>Actions</th>
+	    </tr>
+	  </thead>
+	  <tbody class="list">
+	    <% @writers.each do |writer| %>
+	      <tr class="writer">
+	        <td><%= writer.id %></td>
+	        <td><%= link_to writer.name, writer_path(writer) %></td>
+			<td><%= writer.email %></td>
+	        <td><%= writer.profile.phone_number %></td>
+	        <td><%= pretty_date(writer.created_at) %></td>
+	        <td class="manage">
+	          <%= link_to 'Edit', edit_writer_path(writer), :class => 'btn btn-mini' %>
+	          <%= link_to 'Destroy', writer_path(writer), :method => :delete, :confirm => 'Are you sure?', id: "delete-link", :class => 'btn btn-mini btn-danger' %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	<% end %>
+</table>
+
+<%= link_to 'New', new_writer_path, :class => 'btn btn-primary' %>

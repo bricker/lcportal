@@ -1,0 +1,1 @@
+User.create name: "LC Admin", email: Config["company"]["email"], password: "lcadmin", profile_type: "Admin" # FIXME password is overwritten

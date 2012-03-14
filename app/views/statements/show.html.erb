@@ -1,0 +1,32 @@
+<h1>Statement</h1>
+
+<p>
+  <b>Writer</b><br>
+  <%= @statement.writer_id %>
+</p>
+
+<p>
+  <b>Asset file name</b><br>
+  <%= @statement.asset_file_name %>
+</p>
+
+<p>
+  <b>Asset content type</b><br>
+  <%= @statement.asset_content_type %>
+</p>
+
+<p>
+  <b>Asset file size</b><br>
+  <%= @statement.asset_file_size %>
+</p>
+
+<p>
+  <b>Asset updated at</b><br>
+  <%= @statement.asset_updated_at %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', statements_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_statement_path(@statement), :class => 'btn' %>
+  <%= link_to 'Delete', statement_path(@statement), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>
