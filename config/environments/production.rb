@@ -57,4 +57,6 @@ LCPortal::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  default_url_options[:host] = "http://lcportal.herokuapp.com"
 end
