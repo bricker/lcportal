@@ -28,5 +28,5 @@ LCPortal::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
-  default_url_options[:host] = "http://lcportal.dev"
+  default_url_options[:host] = "lcportal.dev"
 end

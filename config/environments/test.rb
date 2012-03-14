@@ -37,5 +37,5 @@ LCPortal::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
   
-  default_url_options[:host] = "http://lcportal.dev"
+  default_url_options[:host] = "lcportal.dev"
 end
