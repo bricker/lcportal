@@ -1,1 +1,3 @@
-user = User.create name: "Admin", email: "bricker88@gmail.com", profile_type: "Admin"
+user = User.new name: "Admin", email: "bricker88@gmail.com"
+user.profile_type: "Admin"
+user.save
