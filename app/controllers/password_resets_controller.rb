@@ -6,8 +6,12 @@ class PasswordResetsController < ApplicationController
   
   def create
     user = User.find_by_email(params[:email])
-    user.send_password_reset if user
-    redirect_to login_path, notice: "An e-mail has been sent to <strong>#{params[:email]}</strong> with reset instructions."
+    if user
+      user.send_password_reset
+      redirect_to login_path, notice: "An e-mail has been sent to <strong>#{params[:email]}</strong> with reset instructions."
+    else
+      redirect_to new_password_reset_path, alert: "The e-mail address <strong>#{params[:email]}</strong> is not in our records."
+    end
   end
   
   def update
@@ -28,5 +32,7 @@ class PasswordResetsController < ApplicationController
     
     def get_user
       @user = User.find_by_password_reset_token!(params[:id])
+      rescue
+        redirect_to login_path, alert: "Invalid token."
     end
 end

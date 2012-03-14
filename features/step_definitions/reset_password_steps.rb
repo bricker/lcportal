@@ -3,6 +3,10 @@ When /^I go to the forgot password page$/ do
   visit new_password_reset_path
 end
 
+Then /^I should be on the forgot password page$/ do
+  current_path.should eq new_password_reset_path
+end
+
 When /^I follow the link that was e\-mailed to me$/ do
   visit edit_password_reset_path(@user.reload.password_reset_token)
 end
@@ -12,6 +16,11 @@ When /^I go to reset my password$/ do
   visit path
   current_path.should eq path
 end
+
+When /^I visit the password reset page with an invalid token$/ do
+  visit edit_password_reset_path("incorrect")
+end
+
 
 
 #### Actions
