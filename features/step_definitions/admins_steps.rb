@@ -31,6 +31,10 @@ Then /^I should be on the admin's profile page$/ do
   current_path.should eq admin_path(@admin)
 end
 
+When /^I go to the new admin page$/ do
+  visit new_admin_path
+end
+
 
 #### Finders
 Then /^I should see a list of (\d+) admins?$/ do |num|
