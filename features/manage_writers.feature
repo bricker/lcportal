@@ -31,7 +31,7 @@ Scenario: Add a writer
 	And I should see the writer's information
 	And the writer should have a profile
 	And there should be 1 writer
-
+	
 Scenario: Attempt to add a writer with invalid fields
 	When I go to the new writer page
  	And I fill in the writer fields with invalid information

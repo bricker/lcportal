@@ -41,7 +41,6 @@ Scenario: Visit login page while already logged in
 	Given I am logged in
 	When I go to the login page
 	Then I should be redirected to the statements page
-	And I should see a success message
 	
 Scenario: Logout
 	Given I am logged in

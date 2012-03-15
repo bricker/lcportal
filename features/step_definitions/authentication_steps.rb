@@ -9,6 +9,17 @@ Given /^I am logged in$/ do
   page.should have_css ".alert-success"
 end
 
+Given /^I am logged in as an admin$/ do
+  @user ||= create :admin
+  visit login_path
+  fill_in 'email', with: @user.email
+  fill_in 'password', with: @user.password
+  find("input[type=submit]").click
+  current_path.should eq statements_path
+  page.should have_css ".alert-success"
+end
+
+
 Given /^I am logged out$/ do
   visit logout_path
   page.should_not have_css "ul.nav"

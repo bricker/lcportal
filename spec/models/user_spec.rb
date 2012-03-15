@@ -30,9 +30,16 @@ describe User do
   end
   
   describe "callbacks" do
-    it "should downcase the e-mail before validating and saving a user" do
+    it "downcases the e-mail before validating and saving a user" do
       user = create :user, email: "SomeEmail@email.com"
       user.email.should eq "someemail@email.com"
+    end
+    
+    it "generates an auth_token on user creation" do
+      user = build :user
+      user.auth_token.should be_blank
+      user.save
+      user.auth_token.should be_present
     end
   end
     
