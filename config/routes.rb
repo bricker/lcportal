@@ -10,5 +10,5 @@ LCPortal::Application.routes.draw do
     resources :statements, only: [:index, :show]
   end
   
-  root to: 'statements#index'
+  root to: 'sessions#new'
 end
