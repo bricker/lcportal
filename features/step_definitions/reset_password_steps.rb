@@ -12,15 +12,12 @@ When /^I follow the link that was e\-mailed to me$/ do
 end
 
 When /^I go to reset my password$/ do
-  path = edit_password_reset_path(@user.reload.password_reset_token)
-  visit path
-  current_path.should eq path
+  visit edit_password_reset_path(@user.reload.password_reset_token)
 end
 
 When /^I visit the password reset page with an invalid token$/ do
   visit edit_password_reset_path("incorrect")
 end
-
 
 
 #### Actions
@@ -62,4 +59,3 @@ end
 Then /^I should have a new password$/ do
   BCrypt::Password.new(@user.reload.password_digest).should eq "New Password"
 end
-

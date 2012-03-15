@@ -1,11 +1,12 @@
 <%= simple_form_for @user, as: :user, url: password_reset_path(params[:id]), html: { id: "password_reset" } do |f|%>
-	<legend>Reset Password</legend>
-	<%= f.error_notification %>
-	<%= f.input :password %>
-	<%= f.input :password_confirmation %>
+	<fieldset>
+		<legend>Reset Password</legend>
+		<%= f.error_notification %>
+		<%= f.input :password %>
+		<%= f.input :password_confirmation %>
 	
-	<div class="form-action">
-		<%= f.submit nil, :class => 'btn btn-primary' %>
+	<div class="form-actions">
+		<%= f.submit "Reset Password", :class => 'btn btn-primary' %>
 		<%= link_to 'Cancel', login_path, :class => 'btn' %>
 	</div>
 <% end %>

@@ -43,6 +43,15 @@ Then /^I submit the form$/ do
   find("input[type=submit]").click
 end
 
+When /^I fill in "([^"]*)" with "([^"]*)"$/ do |field, email|
+  fill_in field.gsub(/\s/, "_").gsub(/\W/, ""), with: email
+end
+
+When /^I wait (\d+) days$/ do |num|
+  time = Time.now
+  Time.stub!(:now).and_return(time + 60*60*24*num.to_i)
+end
+
 
 #### Assertions
 Then /^an e\-mail should have been sent to the user$/ do

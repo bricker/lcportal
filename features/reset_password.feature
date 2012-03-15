@@ -87,3 +87,21 @@ Scenario: Reset Password as admin
 	And I submit the form
 	Then I should see a success message
 	And I should be logged in
+
+Scenario: Visit reset password page after token has expired
+	Given I am a user
+	When I request a password reset
+	And I wait 3 days
+	And I go to reset my password
+	Then I should see a failure message
+	And I should be on the forgot password page
+
+Scenario: Attempt to reset password after token has expired
+	Given I am a user
+	When I request a password reset
+	And I go to reset my password
+	And I wait 3 days
+	And I fill in a valid password and matching confirmation
+	And I submit the form
+	Then I should see a failure message
+	And I should be on the forgot password page
