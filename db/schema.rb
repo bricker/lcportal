@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312041826) do
+ActiveRecord::Schema.define(:version => 20120315072650) do
 
   create_table "profiles", :force => true do |t|
     t.integer  "writer_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120312041826) do
     t.datetime "password_reset_requested_at"
     t.string   "password_reset_token"
     t.string   "type",                        :default => "", :null => false
+    t.string   "auth_token"
   end
 
 end

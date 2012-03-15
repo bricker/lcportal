@@ -4,12 +4,16 @@ class SessionsController < ApplicationController
   respond_to :html
   
   def new
-    redirect_to statements_path, notice: "You are logged in as #{current_user.name}" if current_user
+    redirect_to statements_path if current_user
   end
   
   def create
     if user = User.authenticate(params[:email], params[:password])
-      session[:user_id] = user.id
+      if params[:remember]
+        cookies.permanent[:auth_token] = user.auth_token
+      else
+        cookies[:auth_token] = user.auth_token
+      end
       redirect_to statements_path, notice: "Logged in."
     else
       flash.now.alert = "Invalid login information."
@@ -18,7 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:auth_token)
     redirect_to login_path, notice: "Logged out."
   end
 

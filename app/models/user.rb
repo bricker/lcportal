@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   before_validation :generate_password, on: :create
   before_validation :downcase_email
+  before_create { generate_token(:auth_token) }
   after_create :send_welcome
   
   attr_accessible :name, :email, :password, :password_confirmation
