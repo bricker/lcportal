@@ -7,19 +7,19 @@ describe ApplicationHelper do
     end
     
     it "returns the default if a format isn't specified" do
-      helper.pretty_date(@date).should eq @date.strftime("%b %e, %Y")
+      pretty_date(@date).should eq @date.strftime("%b %e, %Y")
     end
     
     it "returns a `numbers` format" do
-      helper.pretty_date(@date, format: :numbers).should eq @date.strftime("%m-%e-%y")
+      pretty_date(@date, format: :numbers).should eq @date.strftime("%m-%e-%y")
     end
     
     it "returns a `full` format" do
-      helper.pretty_date(@date, format: :full).should eq @date.strftime("%B #{@date.day.ordinalize}, %Y")
+      pretty_date(@date, format: :full).should eq @date.strftime("%B #{@date.day.ordinalize}, %Y")
     end
     
     it "accepts a custom format" do
-      helper.pretty_date(@date, format: :custom, with: "%D").should eq @date.strftime("%D")
+      pretty_date(@date, format: :custom, with: "%D").should eq @date.strftime("%D")
     end
   end
   
@@ -48,8 +48,12 @@ describe ApplicationHelper do
       any_to_list?(1..5) { "Records list" }.should eq "Records list"
     end
     
-    it "returns a default message if there are no records and no message is specified" do
-      any_to_list?([]) { "Records list" }.should match "There are currently no Arrays" # fascinating list of arrays
+    it "returns a default message if there are no records and no message or title is specified" do
+      any_to_list?([]) { "Records list" }.should match "There is nothing to list yet."
+    end
+    
+    it "returns a more specific default message if there are no records and no message is specified, but a title is" do
+      any_to_list?([], title: "Records") { "Records list" }.should match "Records"
     end
     
     it "returns a specified message if there are no records" do
@@ -81,21 +85,25 @@ describe ApplicationHelper do
         default = "A Default Title"
         helper.check_for(:title, default: default).should eq default
       end
+      
+      it "can accept a string" do
+        pending
+      end
     end
     
     describe "with a variable" do
       it "returns the supplied default string if the variable is empty" do
         default = "There is nothing to display."
-        helper.check_for([], default: default).should match default
+        check_for([], default: default).should match default
       end
       
       it "returns the default string if there are no records and no default string was provided" do
-        helper.check_for([]).should match "There is nothing here to list."
+        check_for([]).should match "There is nothing here to list."
       end
       
       it "returns true if there are records" do
         users = build_list :user, 2
-        helper.check_for(users).should eq nil
+        check_for(users).should eq nil
       end
     end
   end

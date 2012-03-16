@@ -19,9 +19,14 @@ module ApplicationHelper
       block_given? ? capture(&block) : true
     else
       if block_given?
-        options[:title] ||= records.class.to_s.titleize.pluralize # FIXME This doesn't use the class of the objects
-        options[:message] ||= "<thead><tr><td class='none-to-list'>There are currently no #{options[:title]}.</td></tr></thead>"
-        options[:message].html_safe
+        if options[:message].blank?
+          if options[:title].present?
+            options[:message] ||= "<thead><tr><td class='none-to-list'>There are currently no #{options[:title]}.</td></tr></thead>"
+          else
+            options[:message] ||= "<thead><tr><td class='none-to-list'>There is nothing to list yet.</td></tr></thead>"
+          end
+        end
+        return options[:message].html_safe
       else
         return false
       end
