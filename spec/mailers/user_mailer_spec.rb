@@ -8,7 +8,7 @@ describe UserMailer do
     it "sends user password reset url" do
       mail.subject.should match "Password Reset"
       mail.to.should eq [user.email]
-      mail.from.should eq [Config["company"]["email"]]
+      mail.from.should eq [AppConfig["company"]["email"]]
     end
 
     it "renders the body" do
@@ -23,7 +23,7 @@ describe UserMailer do
     it "sends a welcome email" do
       mail.subject.should match "Welcome"
       mail.to.should eq [user.email]
-      mail.from.should eq [Config["company"]["email"]]
+      mail.from.should eq [AppConfig["company"]["email"]]
     end
     
     it "renders the body" do

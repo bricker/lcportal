@@ -5,8 +5,9 @@ def do_password(user, eval)
   end
 end
 
-FactoryGirl.define do 
-  
+include ActionDispatch::TestProcess
+
+FactoryGirl.define do   
   trait :user do
      name "Bryan Ricker"
      password "secret"
@@ -45,5 +46,6 @@ FactoryGirl.define do
   
   factory :statement do
     writer
+    asset { fixture_file_upload(File.join(Rails.root, 'spec', 'support', 'test-upload.pdf'), 'application/pdf') }
   end
 end

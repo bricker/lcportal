@@ -9,6 +9,7 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'capybara/rspec'
   require 'database_cleaner'
+  
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
   
   RSpec.configure do |config|
@@ -20,9 +21,10 @@ Spork.prefork do
     config.include Factory::Syntax::Methods
     config.include MailerMacros
     
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
 
     config.before(:each) do
+      DatabaseCleaner.start
       reset_email
     end
 
@@ -33,5 +35,6 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  DatabaseCleaner.clean_with :truncation
   FactoryGirl.reload
 end

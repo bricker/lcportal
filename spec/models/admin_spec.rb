@@ -6,9 +6,9 @@ describe Admin do
   it { should be_a User }
   
   it 'can run queries based on the user columns' do
-    (1..5).each { |i| create :admin, name: "#{i} John Williams" }
+    (1..3).each { |i| create :admin, name: "#{i} John Williams" }
     admins = Admin.order('name desc')
-    admins.first.name.should eq "5 John Williams"
+    admins.first.name.should eq "3 John Williams"
   end
   
   it "fetches the user attributes as well" do

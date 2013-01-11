@@ -16,21 +16,16 @@ Spork.prefork do
   
   Capybara.default_selector = :css
   ActionController::Base.allow_rescue = false
-  
-  begin
-    DatabaseCleaner.strategy = :truncation
-  rescue NameError
-    raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-  end
-  
+  DatabaseCleaner.strategy = :truncation
+
   After do |scenario|
     DatabaseCleaner.clean
-    reset_email
+    reset_email  
   end
 end
 
 Spork.each_run do
+  DatabaseCleaner.clean
   FactoryGirl.reload
-  LCPortal::Application.reload_routes!
 end
 
